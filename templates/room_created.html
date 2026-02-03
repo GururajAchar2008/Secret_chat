@@ -1,0 +1,31 @@
+
+<head>
+    <link rel='stylesheet' href="{{url_for('static', filename='css/style.css')}}"/>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+</head>
+<div class="card">
+  <h2>Room Created Successfully</h2>
+  <p class="warning">
+    This password will be shown <strong>only once</strong>.
+    Save or copy it now.
+  </p>
+
+  <div class="secret-box">
+    <code>{{ password }}</code>
+    <button onclick="copy()">Copy</button>
+  </div>
+
+  <p class="note">
+    You will NOT be able to see this password again.
+  </p>
+
+  <a href="{{ url_for('chat') }}" class="primary">
+    I have saved it → Enter Chat
+  </a>
+</div>
+
+<script>
+function copy() {
+  navigator.clipboard.writeText("{{ password }}");
+}
+</script>

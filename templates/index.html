@@ -1,0 +1,98 @@
+<html>
+    <head>
+        <title>
+            Secret Chat by GURU
+        </title>
+        <link rel='stylesheet' href="{{url_for('static', filename='css/style.css')}}"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+    </head>
+    <body>
+{% if error %}
+        <div class="error">
+            <p>{{error}}</p>
+        </div>
+        {% endif %}
+  <div class="container">
+
+    <!-- LEFT BRAND PANEL -->
+    <div class="left">
+      <h1 class="logo">💬🔒 SecretRoom</h1>
+      <p class="tagline">Private chat rooms that disappear when you leave.</p>
+
+      <ul class="features">
+        <li>🔐 End-to-end private rooms</li>
+        <li>👥 Limited members only</li>
+        <li>⚡ No signup. No tracking.</li>
+      </ul>
+
+      <footer>Made for quick, secure conversations</footer>
+    </div>
+
+    <!-- RIGHT CARD -->
+    <div class="right">
+      <div class="card">
+
+        <h2>Start a Chat Room</h2>
+        <p class="sub">Create a new room or join an existing one</p>
+
+        <!-- TABS -->
+        <div class="tabs">
+          <button class="tab active" data-tab="create">Create Chat</button>
+          <button class="tab" data-tab="join">Join Chat</button>
+        </div>
+
+    <form action="{{ url_for('create') }}" method="POST">
+
+        <div class="form active" id="create">
+          <label>Chat Room Name</label>
+          <input type="text" placeholder="e.g. Project Alpha" name="chat_name" value="{{caht_name}}" required>
+
+          <label>Your Name</label>
+          <input type="text" placeholder="e.g. guru_07" name="name" value="{{name}}" required>
+
+          
+
+          <label>Chat Password</label>
+          <input type="password" placeholder="Enter password" name="password" value="{{password}}" required>
+
+          <button class="primary">Create Secure Room</button>
+        </div>
+        
+    </form>
+    <form action="{{ url_for('join') }}" method="POST">
+
+        <div class="form" id="join">
+          <label>Chat Code</label>
+          <input type="text" placeholder="e.g. X9K4Q" name="chat_code" value="{{chat_code}}" required>
+
+          <label>Your Name</label>
+          <input type="text" placeholder="e.g. guru_07" name="name" value="{{name}}" required>
+
+          <label>Chat Password</label>
+          <input type="password" placeholder="Enter password" name="password" value="{{password}}"  required>
+
+          <button class="primary">Join Chat Room</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+</body>
+<script type="text/javascript">
+    const tabs = document.querySelectorAll(".tab");
+const forms = document.querySelectorAll(".form");
+
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    tabs.forEach(t => t.classList.remove("active"));
+    forms.forEach(f => f.classList.remove("active"));
+
+    tab.classList.add("active");
+    document.getElementById(tab.dataset.tab).classList.add("active");
+  });
+});
+
+</script>
+</html>

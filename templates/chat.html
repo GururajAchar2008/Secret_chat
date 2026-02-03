@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title>
+            {{name}}'s chat
+        </title>
+        <link rel='stylesheet' href="{{url_for('static', filename='css/style.css')}}"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+    </head>
+    <body class="chat-body">
+
+  <header class="chat-header">
+    <div>
+      <h1>{{ chat_name }}</h1>
+      <p>Room Code: <strong>{{ code }}</strong> · Members: {{ memebers }}</p>
+    </div>
+  </header>
+
+  <main class="chat-wrapper">
+    <div class="messages" id="messages"></div>
+
+    <div class="inputs">
+      <input
+        type="text"
+        placeholder="Type your message…"
+        class="message-input"
+        id="message"
+      />
+      <button id="send-btn" onclick="sendMessage()">
+        <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </div>
+  </main>
+
+</body>
+
+    <script type='text/javascript'>
+            var socketio = io({
+                    transports: ["websocket"]
+                });
+            const messages = document.getElementById("messages")
+
+            const createMessage = (name, msg) => {
+                const content = `
+                <div class="text">
+                  <span>
+                     <strong>${name}</strong>:${msg}
+                  </span>
+                </div>
+                `
+                messages.innerHTML += content;
+            };
+             socketio.on("message", (data) => {
+                createMessage(data.name, data.message);
+
+             });
+
+            const sendMessage = () => {
+                const message = document.getElementById("message")
+                if (message.value === "") return;
+                socketio.emit("message",{ data: message.value });
+                message.value ="";
+            };
+        </script>
+</html>
