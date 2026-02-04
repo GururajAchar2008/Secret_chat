@@ -4,9 +4,6 @@
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
 }
-* {
-  box-sizing: border-box;
-}
 
 html, body {
   margin: 0;
@@ -16,16 +13,16 @@ html, body {
   font-family: "Inter", system-ui, sans-serif;
 }
 
-
 body {
   background: radial-gradient(circle at top, #0f172a, #020617);
   color: #e5e7eb;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .container {
   display: flex;
   height: 100%;
+  min-height: 100vh;
 }
 
 /* LEFT PANEL */
@@ -102,12 +99,14 @@ footer {
   border: none;
   color: #9ca3af;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .tab.active {
   background: linear-gradient(135deg, #22c55e, #16a34a);
   color: #020617;
   border-radius: 10px;
+  font-weight: 600;
 }
 
 /* FORMS */
@@ -150,65 +149,31 @@ input:focus, select:focus {
   border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
+  color: #020617;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
 }
 
 .primary:hover {
   opacity: 0.9;
 }
-.error{
-    position:fixed;
-    top: 2%;
-    right:2%;
-    width:35%;
-    height:auto;
-    background-color: rgb(243, 108, 108);
-    color:rgb(255, 255, 255);
-    padding:2%;
-    border-radius: 10px;
-    border:2px solid red;
-}
-.messsages-box {
-  width: 100%;
-  max-width: 900px;
-  height: 70vh;
-  background: #020617;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+
+.error {
+  position: fixed;
+  top: 2%;
+  right: 2%;
+  width: 35%;
+  height: auto;
+  background-color: rgb(243, 108, 108);
+  color: rgb(255, 255, 255);
+  padding: 2%;
+  border-radius: 10px;
+  border: 2px solid red;
+  z-index: 1000;
 }
 
-.messages{
-  overflow-y: auto;
-  flex:1;
-  width:100%;
-  height:70%;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  padding:1rem;
-
-}
-.messages::-webkit-scrollbar {
-  display: none;
-}
-.inputs {
-  display: flex;
-  gap: 0.5rem;
-  padding: 0.6rem;
-  background: #020617;
-  border-top: 1px solid #1e293b;
-}
-h1{
-  text-align: center;
-}
-#message{
-  flex:1;
-}
-p{
-  padding-left:10px;
-  padding-top:10px;
-  text-decoration:underline
-}
 /* CHAT PAGE */
 .chat-body {
   min-height: 100vh;
@@ -222,6 +187,7 @@ p{
 
 /* HEADER */
 .chat-header {
+  width: 100%;
   padding: 20px 40px;
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(20px);
@@ -237,6 +203,8 @@ p{
   font-size: 13px;
   color: #9ca3af;
   margin-top: 4px;
+  padding-left: 0;
+  text-decoration: none;
 }
 
 /* MAIN CHAT */
@@ -259,6 +227,7 @@ p{
   padding: 20px;
   overflow-y: auto;
   scrollbar-width: none;
+  min-height: 400px;
 }
 
 .messages::-webkit-scrollbar {
@@ -267,7 +236,7 @@ p{
 
 /* MESSAGE BUBBLE */
 .text {
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.8rem;
   font-size: 0.95rem;
   line-height: 1.4;
 }
@@ -278,6 +247,8 @@ p{
   border-radius: 14px;
   background: rgba(255,255,255,0.08);
   font-size: 14px;
+  word-wrap: break-word;
+  max-width: 100%;
 }
 
 .text strong {
@@ -321,10 +292,13 @@ p{
 #send-btn:hover {
   opacity: 0.9;
 }
+
+/* ROOM CREATED PAGE */
 .warning {
   color: #facc15;
   font-size: 14px;
   margin-bottom: 12px;
+  text-align: center;
 }
 
 .secret-box {
@@ -336,73 +310,396 @@ p{
   border-radius: 10px;
   padding: 14px;
   margin: 15px 0;
+  gap: 10px;
 }
 
 .secret-box code {
   font-size: 16px;
   color: #22c55e;
+  word-break: break-all;
+}
+
+.secret-box button {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border: none;
+  border-radius: 8px;
+  color: #020617;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.secret-box button:hover {
+  opacity: 0.9;
 }
 
 .note {
   font-size: 13px;
   color: #9ca3af;
   margin-bottom: 20px;
-}
-
-.inputs input {
-  flex: 1;
-  padding: 0.7rem;
-  border-radius: 8px;
-  border: none;
-  outline: none;
-  font-size: 1rem;
-}
-
-.inputs button {
-  padding: 0.7rem 1rem;
-  border-radius: 8px;
-  border: none;
-  background: #2563eb;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-}
-@media (max-width: 768px) {
-  .chat-name-header {
-    font-size: 1.2rem;
-    text-align: center;
-  }
-
-  .chat-room-password {
-    font-size: 0.75rem;
-    text-align: center;
-  }
-
-  .messsages-box {
-    height: 75vh;
-    border-radius: 10px;
-  }
-
-  .inputs input {
-    font-size: 0.9rem;
-  }
-
-  .inputs button {
-    font-size: 0.9rem;
-  }
-}
-.card {
-  width: 100%;
-  max-width: 420px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  background: #020617;
-  border-radius: 14px;
   text-align: center;
 }
 
-.secret-box {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+/* RESPONSIVE DESIGN - TABLETS */
+@media (max-width: 1024px) {
+  .left {
+    width: 35%;
+    padding: 50px 40px;
+  }
+
+  .right {
+    width: 65%;
+  }
+
+  .logo {
+    font-size: 28px;
+  }
+
+  .features li {
+    font-size: 15px;
+  }
+}
+
+/* RESPONSIVE DESIGN - MOBILE LANDSCAPE AND SMALL TABLETS */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left {
+    width: 100%;
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  .logo {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .tagline {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .features {
+    margin-bottom: 30px;
+    padding: 0 20px;
+  }
+
+  .features li {
+    font-size: 14px;
+    margin: 10px 0;
+  }
+
+  footer {
+    font-size: 12px;
+    padding-bottom: 20px;
+  }
+
+  .right {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 500px;
+    padding: 25px;
+    margin: 0 auto 30px;
+  }
+
+  .card h2 {
+    font-size: 20px;
+  }
+
+  .sub {
+    font-size: 13px;
+  }
+
+  .tab {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .error {
+    width: 80%;
+    right: 10%;
+    left: 10%;
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  /* CHAT PAGE MOBILE */
+  .chat-body {
+    padding: 0;
+  }
+
+  .chat-header {
+    padding: 15px 20px;
+  }
+
+  .chat-header h1 {
+    font-size: 18px;
+  }
+
+  .chat-header p {
+    font-size: 12px;
+  }
+
+  .chat-wrapper {
+    margin: 10px;
+    border-radius: 12px;
+    height: calc(100vh - 120px);
+  }
+
+  .messages {
+    padding: 15px;
+    min-height: auto;
+  }
+
+  .text span {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  .inputs {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .message-input {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  #send-btn {
+    padding: 0 15px;
+    font-size: 14px;
+  }
+}
+
+/* RESPONSIVE DESIGN - SMALL SMARTPHONES */
+@media (max-width: 480px) {
+  .left {
+    padding: 20px 15px;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .tagline {
+    font-size: 13px;
+  }
+
+  .features {
+    padding: 0 10px;
+  }
+
+  .features li {
+    font-size: 13px;
+    margin: 8px 0;
+  }
+
+  .right {
+    padding: 15px;
+  }
+
+  .card {
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .card h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .sub {
+    font-size: 12px;
+    margin-bottom: 15px;
+  }
+
+  .tabs {
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+
+  .tab {
+    padding: 8px 6px;
+    font-size: 12px;
+  }
+
+  label {
+    font-size: 13px;
+    margin-top: 12px;
+  }
+
+  input, select {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .primary {
+    padding: 12px;
+    font-size: 14px;
+    margin-top: 20px;
+  }
+
+  .error {
+    width: 90%;
+    right: 5%;
+    left: 5%;
+    padding: 12px;
+    font-size: 13px;
+  }
+
+  /* CHAT PAGE SMALL MOBILE */
+  .chat-header {
+    padding: 12px 15px;
+  }
+
+  .chat-header h1 {
+    font-size: 16px;
+  }
+
+  .chat-header p {
+    font-size: 11px;
+    margin-top: 3px;
+  }
+
+  .chat-wrapper {
+    margin: 8px;
+    border-radius: 10px;
+    height: calc(100vh - 100px);
+  }
+
+  .messages {
+    padding: 12px;
+  }
+
+  .text {
+    margin-bottom: 0.6rem;
+  }
+
+  .text span {
+    font-size: 12px;
+    padding: 7px 10px;
+  }
+
+  .inputs {
+    padding: 10px;
+    gap: 6px;
+  }
+
+  .message-input {
+    padding: 9px 10px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+
+  #send-btn {
+    padding: 0 12px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+
+  /* ROOM CREATED PAGE MOBILE */
+  .warning {
+    font-size: 13px;
+  }
+
+  .secret-box {
+    flex-direction: column;
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .secret-box code {
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .secret-box button {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .note {
+    font-size: 12px;
+  }
+}
+
+/* RESPONSIVE DESIGN - EXTRA SMALL DEVICES */
+@media (max-width: 360px) {
+  .logo {
+    font-size: 18px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .card h2 {
+    font-size: 16px;
+  }
+
+  .tab {
+    font-size: 11px;
+    padding: 7px 5px;
+  }
+
+  input, select {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .primary {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .chat-header h1 {
+    font-size: 14px;
+  }
+
+  .chat-header p {
+    font-size: 10px;
+  }
+
+  .text span {
+    font-size: 11px;
+    padding: 6px 8px;
+  }
+}
+
+/* FIX FOR LANDSCAPE ORIENTATION ON MOBILE */
+@media (max-height: 500px) and (orientation: landscape) {
+  .left {
+    display: none;
+  }
+
+  .right {
+    width: 100%;
+  }
+
+  .chat-wrapper {
+    height: calc(100vh - 80px);
+    margin: 5px;
+  }
+
+  .chat-header {
+    padding: 10px 15px;
+  }
+
+  .messages {
+    padding: 10px;
+  }
+
+  .inputs {
+    padding: 8px;
+  }
 }
