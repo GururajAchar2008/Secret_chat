@@ -28,6 +28,7 @@
         placeholder="Type your message…"
         class="message-input"
         id="message"
+        onKeyDown = {handleKeyDown}
       />
       <button id="send-btn" onclick="sendMessage()">
         <i class="fa-solid fa-paper-plane"></i>
@@ -64,5 +65,11 @@
                 socketio.emit("message",{ data: message.value });
                 message.value ="";
             };
+
+           const handleKeyDown = (e) => {
+               if ( e.kay === 'Enter'){
+                   sendMessage();
+               }
+           }
         </script>
 </html>
